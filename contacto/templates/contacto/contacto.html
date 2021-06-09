@@ -1,0 +1,37 @@
+{% extends 'ProyectoWebApp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Message -->
+<section class="page-section clearfix">
+    <div class="container">
+        <div class="intro">
+            <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="/media/contacto/contacto.jpg" alt="">
+            <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                <h2 class="section-heading mb-4">
+                    <span class="section-heading-upper">Formulario de Contacto</span>
+                    
+                </h2>
+                <div class="contenedorFormulario"></div>
+                    {% if 'valido' in request.GET %}
+                        <span class="section-heading-upper">Información enviada correctamente, gracias</span>
+                    {% elif 'novalido' in request.GET %}
+                        <span class="section-heading-upper">Información erronea, revise email</span>
+                    {% else %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <table style="color: white; font-size: 14px; margin: 20px auto;">
+                        {{ miFormulario.as_table }}
+                    </table>
+                        <input type="submit" value="Enviar" style="width: 150px;">
+                </form>
+                    {% endif %}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
